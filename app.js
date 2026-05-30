@@ -303,7 +303,7 @@ document.addEventListener('visibilitychange', () => {
         document.querySelector('.gallery').scrollIntoView({ behavior: 'smooth' });
     }
 
-    function createItemHTML(item, globalIndex) {
+    function createItemHTML(item, index) {
         const isVideo = item.type === 'video';
         const mediaHTML = isVideo 
             ? `<video poster="${item.poster || item.thumbnail}" muted loop loading="lazy">
