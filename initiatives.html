@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Initiatives | BraSalty Foundation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">BraSalty Foundation</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#team">Team</a></li>
+                <li><a href="initiatives.html" class="active">Initiatives</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="gallery">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Our Initiatives</h2>
+            <p class="section-subtitle" style="text-align: center; margin-bottom: 40px; color: #666;">
+                Capturing moments of impact across our community programs
+            </p>
+
+            <div class="gallery-filters" id="filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+            </div>
+
+            <div class="gallery-grid" id="galleryGrid"></div>
+
+            <div class="pagination" id="pagination" style="display: none;">
+                <button id="prevBtn" onclick="changePage(-1)">← Previous</button>
+                <span class="page-info" id="pageInfo">Page 1 of 1</span>
+                <button id="nextBtn" onclick="changePage(1)">Next →</button>
+            </div>
+        </div>
+    </section>
+
+    <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightbox(event)">&times;</button>
+            <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(-1, event)">‹</button>
+            <button class="lightbox-nav lightbox-next" onclick="navigateLightbox(1, event)">›</button>
+            <div id="lightboxMedia"></div>
+            <p class="lightbox-caption" id="lightboxCaption"></p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 BraSalty Foundation. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
