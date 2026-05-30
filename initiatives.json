@@ -5,7 +5,7 @@
     "category": "education",
     "type": "photo",
     "src": "images/school-donate.jpg",
-    "thumbnail": "images/initiatives/school-donation-thumb.jpg",
+    "thumbnail": "images/school-donation-thumb.jpg",
     "date": "September 2025"
   },
   {
@@ -15,7 +15,7 @@
     "type": "video",
     "src": "videos/community-match.mp4",
     "poster": "images/initiatives/sports-poster.jpg",
-    "thumbnail": "images/initiatives/sports-poster.jpg",
+    "thumbnail": "images/sports-poster.jpg",
     "date": "December 2025"
   },
  
@@ -25,7 +25,7 @@
     "category": "community",
     "type": "photo",
     "src": "images/initiatives/clean-up.jpg",
-    "thumbnail": "images/initiatives/clean-up-thumb.jpg",
+    "thumbnail": "imageslean-up-thumb.jpg",
     "date": "December 2024"
   },
   {
@@ -34,8 +34,8 @@
     "category": "education",
     "type": "video",
     "src": "videos/school.mp4",
-    "poster": "images/initiatives/mentorship-poster.jpg",
-    "thumbnail": "images/initiatives/mentorship-poster.jpg",
+    "poster": "images/mentorship-poster.jpg",
+    "thumbnail": "images/mentorship-poster.jpg",
     "date": "November 2024"
   },
   {
@@ -44,7 +44,7 @@
     "category": "sports",
     "type": "photo",
     "src": "images/initiatives/athletics-day.jpg",
-    "thumbnail": "images/initiatives/athletics-day-thumb.jpg",
+    "thumbnail": "images/athletics-day-thumb.jpg",
     "date": "October 2024"
   },
   {
@@ -53,7 +53,7 @@
     "category": "community",
     "type": "photo",
     "src": "images/initiatives/women-workshop.jpg",
-    "thumbnail": "images/initiatives/women-workshop-thumb.jpg",
+    "thumbnail": "images/women-workshop-thumb.jpg",
     "date": "September 2024"
   },
   {
@@ -62,7 +62,7 @@
     "category": "health",
     "type": "photo",
     "src": "images/initiatives/dental-camp.jpg",
-    "thumbnail": "images/initiatives/dental-camp-thumb.jpg",
+    "thumbnail": "images/dental-camp-thumb.jpg",
     "date": "August 2024"
   }
 ]
