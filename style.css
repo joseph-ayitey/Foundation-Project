@@ -1185,21 +1185,29 @@ body {
     }
 }
 
-/*Read More Button for Blog Posts */
-.read-more-btn {
-    display: inline-block;
-    margin-top: 15px;
-    padding: 10px 18px;
-    background-color: #000;
-    color: #fff;
+
+/* TikTok Button Styles */
+.tiktok-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: #000000;
+    color: #ffffff;
+    border-radius: 50%;
     text-decoration: none;
-    border-radius: 5px;
-    font-size: 14px;
-    font-weight: 600;
-    transition: 0.3s ease;
+    font-size: 20px;
+    transition: all 0.3s ease;
+    margin-top: 10px;
 }
 
-.read-more-btn:hover {
-    background-color: #333;
-    transform: translateY(-2px);
+.tiktok-btn:hover {
+    background: #fe2c55;
+    transform: scale(1.1);
+    color: #ffffff;
+}
+
+.tiktok-btn i {
+    line-height: 1;
 }
