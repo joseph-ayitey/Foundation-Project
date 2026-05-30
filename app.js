@@ -207,18 +207,23 @@ document.addEventListener('visibilitychange', () => {
     async function loadGalleryData() {
         try {
             showSkeletons();
-            const response = await fetch('data/initiatives.json');
+            const response = await fetch('initiatives.json');
             if (!response.ok) throw new Error('Failed to load data');
             allItems = await response.json();
             filteredItems = [...allItems];
             
             generateFilters();
             renderPage();
-        } catch (error) {
-            console.error('Error loading gallery:', error);
-            document.getElementById('galleryGrid').innerHTML = 
-                '<div class="no-results">Failed to load initiatives. Please try again later.</div>';
-        }
+        } 
+        catch (error) {
+    console.error('Gallery load error:', error);
+
+    document.getElementById('galleryGrid').innerHTML = `
+        <div class="no-results">
+            ${error.message}
+        </div>
+    `;
+}
     }
 
     function showSkeletons() {
@@ -314,8 +319,8 @@ document.addEventListener('visibilitychange', () => {
         
         return `
             <div class="gallery-item" data-category="${item.category}" 
-                 onclick="window.openLightbox(${globalIndex})" 
-                 style="animation-delay: ${(globalIndex % ITEMS_PER_PAGE) * 0.1}s">
+                 onclick="window.openLightbox(${index})" 
+                 style="animation-delay: ${(index % ITEMS_PER_PAGE) * 0.1}s">
                 ${mediaHTML}
                 <div class="gallery-overlay">
                     <h4>${item.title}</h4>
