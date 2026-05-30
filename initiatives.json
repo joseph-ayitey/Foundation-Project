@@ -4,7 +4,7 @@
     "title": "School Supplies Drive",
     "category": "education",
     "type": "photo",
-    "src": "images/initiatives/school-donation.jpg",
+    "src": "images/school-donation.jpg",
     "thumbnail": "images/initiatives/school-donation-thumb.jpg",
     "date": "September 2025"
   },
@@ -33,7 +33,7 @@
     "title": "Youth Mentorship Program",
     "category": "education",
     "type": "video",
-    "src": "videos/youth-mentorship.mp4",
+    "src": "videos/school.mp4",
     "poster": "images/initiatives/mentorship-poster.jpg",
     "thumbnail": "images/initiatives/mentorship-poster.jpg",
     "date": "November 2024"
