@@ -187,3 +187,207 @@ document.addEventListener('visibilitychange', () => {
         });
     }
 });
+
+// ============================================
+// GALLERY / INITIATIVES PAGE FUNCTIONALITY
+// ============================================
+
+(function() {
+    // Only run on initiatives page
+    if (!document.getElementById('galleryGrid')) return;
+
+    const ITEMS_PER_PAGE = 6;
+    let allItems = [];
+    let filteredItems = [];
+    let currentPage = 1;
+    let currentFilter = 'all';
+    let currentLightboxIndex = 0;
+
+    // Load gallery data from JSON
+    async function loadGalleryData() {
+        try {
+            showSkeletons();
+            const response = await fetch('data/initiatives.json');
+            if (!response.ok) throw new Error('Failed to load data');
+            allItems = await response.json();
+            filteredItems = [...allItems];
+            
+            generateFilters();
+            renderPage();
+        } catch (error) {
+            console.error('Error loading gallery:', error);
+            document.getElementById('galleryGrid').innerHTML = 
+                '<div class="no-results">Failed to load initiatives. Please try again later.</div>';
+        }
+    }
+
+    function showSkeletons() {
+        const grid = document.getElementById('galleryGrid');
+        grid.innerHTML = '';
+        for (let i = 0; i < ITEMS_PER_PAGE; i++) {
+            const skeleton = document.createElement('div');
+            skeleton.className = 'skeleton';
+            grid.appendChild(skeleton);
+        }
+    }
+
+    // Generate filter buttons from data
+    function generateFilters() {
+        const categories = [...new Set(allItems.map(item => item.category))];
+        const filterContainer = document.getElementById('filters');
+        
+        categories.forEach(cat => {
+            const btn = document.createElement('button');
+            btn.className = 'filter-btn';
+            btn.dataset.filter = cat;
+            btn.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
+            btn.onclick = () => setFilter(cat);
+            filterContainer.appendChild(btn);
+        });
+    }
+
+    function setFilter(category) {
+        currentFilter = category;
+        currentPage = 1;
+        
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.filter === category);
+        });
+        
+        filteredItems = category === 'all' 
+            ? [...allItems] 
+            : allItems.filter(item => item.category === category);
+        
+        renderPage();
+    }
+
+    // Render current page
+    function renderPage() {
+        const grid = document.getElementById('galleryGrid');
+        const pagination = document.getElementById('pagination');
+        
+        if (filteredItems.length === 0) {
+            grid.innerHTML = '<div class="no-results">No initiatives found in this category.</div>';
+            pagination.style.display = 'none';
+            return;
+        }
+        
+        const start = (currentPage - 1) * ITEMS_PER_PAGE;
+        const end = start + ITEMS_PER_PAGE;
+        const pageItems = filteredItems.slice(start, end);
+        
+        grid.innerHTML = pageItems.map((item, index) => createItemHTML(item, start + index)).join('');
+        
+        // Setup video hover previews
+        document.querySelectorAll('.gallery-item video').forEach(video => {
+            const parent = video.closest('.gallery-item');
+            parent.addEventListener('mouseenter', () => video.play());
+            parent.addEventListener('mouseleave', () => {
+                video.pause();
+                video.currentTime = 0;
+            });
+        });
+        
+        // Update pagination
+        const totalPages = Math.ceil(filteredItems.length / ITEMS_PER_PAGE);
+        pagination.style.display = totalPages > 1 ? 'flex' : 'none';
+        document.getElementById('pageInfo').textContent = `Page ${currentPage} of ${totalPages}`;
+        document.getElementById('prevBtn').disabled = currentPage === 1;
+        document.getElementById('nextBtn').disabled = currentPage === totalPages;
+        
+        document.querySelector('.gallery').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function createItemHTML(item, globalIndex) {
+        const isVideo = item.type === 'video';
+        const mediaHTML = isVideo 
+            ? `<video poster="${item.poster || item.thumbnail}" muted loop loading="lazy">
+                 <source src="${item.src}" type="video/mp4">
+               </video>
+               <span class="video-badge">
+                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                   <path d="M8 5v14l11-7z"/>
+                 </svg>
+                 Video
+               </span>`
+            : `<img src="${item.thumbnail || item.src}" alt="${item.title}" loading="lazy">`;
+        
+        return `
+            <div class="gallery-item" data-category="${item.category}" 
+                 onclick="window.openLightbox(${globalIndex})" 
+                 style="animation-delay: ${(globalIndex % ITEMS_PER_PAGE) * 0.1}s">
+                ${mediaHTML}
+                <div class="gallery-overlay">
+                    <h4>${item.title}</h4>
+                    <span>${item.category.charAt(0).toUpperCase() + item.category.slice(1)} • ${item.date}</span>
+                </div>
+            </div>
+        `;
+    }
+
+    // Expose to global scope for onclick handlers
+    window.changePage = function(direction) {
+        currentPage += direction;
+        renderPage();
+    };
+
+    window.openLightbox = function(index) {
+        currentLightboxIndex = index;
+        const lightbox = document.getElementById('lightbox');
+        const mediaContainer = document.getElementById('lightboxMedia');
+        const caption = document.getElementById('lightboxCaption');
+        const item = filteredItems[index];
+        
+        mediaContainer.innerHTML = '';
+        
+        if (item.type === 'video') {
+            const video = document.createElement('video');
+            video.src = item.src;
+            video.controls = true;
+            video.autoplay = true;
+            video.muted = false;
+            video.style.maxHeight = '85vh';
+            mediaContainer.appendChild(video);
+        } else {
+            const img = document.createElement('img');
+            img.src = item.src;
+            img.alt = item.title;
+            mediaContainer.appendChild(img);
+        }
+        
+        caption.textContent = `${item.title} — ${item.category.charAt(0).toUpperCase() + item.category.slice(1)} • ${item.date}`;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    };
+
+    window.closeLightbox = function(e) {
+        if (e.target.classList.contains('lightbox') || e.target.classList.contains('lightbox-close')) {
+            const lightbox = document.getElementById('lightbox');
+            const videos = lightbox.querySelectorAll('video');
+            videos.forEach(v => v.pause());
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    };
+
+    window.navigateLightbox = function(direction, e) {
+        e.stopPropagation();
+        const newIndex = currentLightboxIndex + direction;
+        if (newIndex >= 0 && newIndex < filteredItems.length) {
+            window.openLightbox(newIndex);
+        }
+    };
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        const lightbox = document.getElementById('lightbox');
+        if (!lightbox || !lightbox.classList.contains('active')) return;
+        
+        if (e.key === 'Escape') window.closeLightbox({ target: lightbox });
+        if (e.key === 'ArrowLeft') window.navigateLightbox(-1, { stopPropagation: () => {} });
+        if (e.key === 'ArrowRight') window.navigateLightbox(1, { stopPropagation: () => {} });
+    });
+
+    // Initialize
+    loadGalleryData();
+})();
