@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "title": "School Supplies Drive",
+    "category": "education",
+    "type": "photo",
+    "src": "images/initiatives/school-donation.jpg",
+    "thumbnail": "images/initiatives/school-donation-thumb.jpg",
+    "date": "September 2025"
+  },
+  {
+    "id": 2,
+    "title": "Community Football Match",
+    "category": "sports",
+    "type": "video",
+    "src": "videos/community-match.mp4",
+    "poster": "images/initiatives/sports-poster.jpg",
+    "thumbnail": "images/initiatives/sports-poster.jpg",
+    "date": "December 2025"
+  },
+ 
+  {
+    "id": 3,
+    "title": "Community Clean-Up",
+    "category": "community",
+    "type": "photo",
+    "src": "images/initiatives/clean-up.jpg",
+    "thumbnail": "images/initiatives/clean-up-thumb.jpg",
+    "date": "December 2024"
+  },
+  {
+    "id": 4,
+    "title": "Youth Mentorship Program",
+    "category": "education",
+    "type": "video",
+    "src": "videos/youth-mentorship.mp4",
+    "poster": "images/initiatives/mentorship-poster.jpg",
+    "thumbnail": "images/initiatives/mentorship-poster.jpg",
+    "date": "November 2024"
+  },
+  {
+    "id": 5,
+    "title": "Annual Athletics Day",
+    "category": "sports",
+    "type": "photo",
+    "src": "images/initiatives/athletics-day.jpg",
+    "thumbnail": "images/initiatives/athletics-day-thumb.jpg",
+    "date": "October 2024"
+  },
+  {
+    "id": 6,
+    "title": "Women's Empowerment Workshop",
+    "category": "community",
+    "type": "photo",
+    "src": "images/initiatives/women-workshop.jpg",
+    "thumbnail": "images/initiatives/women-workshop-thumb.jpg",
+    "date": "September 2024"
+  },
+  {
+    "id": 7,
+    "title": "Dental Health Camp",
+    "category": "health",
+    "type": "photo",
+    "src": "images/initiatives/dental-camp.jpg",
+    "thumbnail": "images/initiatives/dental-camp-thumb.jpg",
+    "date": "August 2024"
+  }
+]
