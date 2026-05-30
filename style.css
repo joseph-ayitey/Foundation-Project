@@ -1219,27 +1219,36 @@ a:focus-visible {
 
 
 /* TikTok Button Styles */
+
 .tiktok-btn {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
+    gap: 8px;
     background: #000000;
     color: #ffffff;
-    border-radius: 50%;
+    padding: 10px 20px;
+    border-radius: 6px;
     text-decoration: none;
-    font-size: 20px;
+    font-weight: 600;
     transition: all 0.3s ease;
-    margin-top: 10px;
+}
+
+.tiktok-btn svg {
+    width: 18px;
+    height: 18px;
 }
 
 .tiktok-btn:hover {
-    background: #fe2c55;
-    transform: scale(1.1);
-    color: #ffffff;
+    background: #1a1a1a;
+    transform: translateY(-2px);
 }
 
-.tiktok-btn i {
-    line-height: 1;
+/* Optional: hide text and show only icon on small screens */
+@media (max-width: 480px) {
+    .tiktok-btn .btn-text {
+        display: none;
+    }
+    .tiktok-btn {
+        padding: 10px;
+    }
 }
