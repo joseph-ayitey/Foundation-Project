@@ -238,18 +238,28 @@ document.addEventListener('visibilitychange', () => {
 
     // Generate filter buttons from data
     function generateFilters() {
-        const categories = [...new Set(allItems.map(item => item.category))];
-        const filterContainer = document.getElementById('filters');
-        
-        categories.forEach(cat => {
-            const btn = document.createElement('button');
-            btn.className = 'filter-btn';
-            btn.dataset.filter = cat;
-            btn.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
-            btn.onclick = () => setFilter(cat);
-            filterContainer.appendChild(btn);
-        });
-    }
+    const categories = [...new Set(allItems.map(item => item.category))];
+    const filterContainer = document.getElementById('filters');
+
+    filterContainer.innerHTML =
+        '<button class="filter-btn active" data-filter="all">All</button>';
+
+    document
+        .querySelector('[data-filter="all"]')
+        .addEventListener('click', () => setFilter('all'));
+
+    categories.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn';
+        btn.dataset.filter = cat;
+        btn.textContent =
+            cat.charAt(0).toUpperCase() + cat.slice(1);
+
+        btn.addEventListener('click', () => setFilter(cat));
+
+        filterContainer.appendChild(btn);
+    });
+}
 
     function setFilter(category) {
         currentFilter = category;
@@ -286,10 +296,8 @@ document.addEventListener('visibilitychange', () => {
         // Setup video hover previews
         document.querySelectorAll('.gallery-item video').forEach(video => {
             const parent = video.closest('.gallery-item');
-            parent.addEventListener('mouseenter', () => video.play());
-            parent.addEventListener('mouseleave', () => {
-                video.pause();
-                video.currentTime = 0;
+          parent.addEventListener('mouseenter', () => {
+                 video.play().catch(() => {});
             });
         });
         
@@ -299,9 +307,13 @@ document.addEventListener('visibilitychange', () => {
         document.getElementById('pageInfo').textContent = `Page ${currentPage} of ${totalPages}`;
         document.getElementById('prevBtn').disabled = currentPage === 1;
         document.getElementById('nextBtn').disabled = currentPage === totalPages;
-        
-        document.querySelector('.gallery').scrollIntoView({ behavior: 'smooth' });
-    }
+        const gallery = document.querySelector('.gallery');
+            if (gallery) {
+                  gallery.scrollIntoView({
+                     behavior: 'smooth'
+    });
+}    
+}
 
     function createItemHTML(item, index) {
         const isVideo = item.type === 'video';
@@ -331,10 +343,16 @@ document.addEventListener('visibilitychange', () => {
     }
 
     // Expose to global scope for onclick handlers
-    window.changePage = function(direction) {
-        currentPage += direction;
-        renderPage();
-    };
+   window.changePage = function(direction) {
+    const totalPages = Math.ceil(filteredItems.length / ITEMS_PER_PAGE);
+
+    currentPage += direction;
+
+    if (currentPage < 1) currentPage = 1;
+    if (currentPage > totalPages) currentPage = totalPages;
+
+    renderPage();
+};
 
     window.openLightbox = function(index) {
         currentLightboxIndex = index;
@@ -342,6 +360,7 @@ document.addEventListener('visibilitychange', () => {
         const mediaContainer = document.getElementById('lightboxMedia');
         const caption = document.getElementById('lightboxCaption');
         const item = filteredItems[index];
+            if (!item) return;  
         
         mediaContainer.innerHTML = '';
         
