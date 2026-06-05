@@ -1253,6 +1253,36 @@ a:focus-visible {
     }
 }
 
+/* MOBILE NAV */
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+@media (max-width:768px){
+
+.nav-links{
+display:none;
+flex-direction:column;
+}
+
+.nav-links.active{
+display:flex;
+}
+
+.hamburger{
+display:flex;
+flex-direction:column;
+cursor:pointer;
+}
+
+}
+
+
 /* ============================================
    GALLERY / INITIATIVES PAGE STYLES
    ============================================ */
