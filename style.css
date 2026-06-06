@@ -1243,6 +1243,49 @@ a:focus-visible {
     transform: translateY(-2px);
 }
 
+/* Responsive TikTok Button */
+@media (max-width: 768px) {
+    .tiktok-btn {
+        padding: 8px 16px;
+    }
+    .tiktok-btn svg {
+        width: 16px;
+        height: 16px;   
+    }
+}   
+
+/*Instagram Button Styles */
+.social-links{
+    display:flex;
+    gap:10px;
+    margin-top:15px;
+}
+
+.instagram-btn{
+    background:#E1306C;
+    color:white;
+}
+
+.instagram-btn:hover{
+    background:#c52b60;
+}
+
+.tiktok-btn,
+.instagram-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:10px 14px;
+    border-radius:8px;
+    text-decoration:none;
+}
+
+.tiktok-btn svg,
+.instagram-btn svg{
+    width:18px;
+    height:18px;
+}
+
 /* Optional: hide text and show only icon on small screens */
 @media (max-width: 480px) {
     .tiktok-btn .btn-text {
