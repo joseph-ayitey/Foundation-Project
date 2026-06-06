@@ -1286,6 +1286,19 @@ a:focus-visible {
     height:18px;
 }
 
+/* Responsive Instagram Button */
+@media (max-width: 768px) {
+    .instagram-btn {
+        padding: 8px 12px;
+    }
+    .instagram-btn svg {
+        width: 16px;
+        height: 16px;
+    }
+}   
+
+
+
 /* Optional: hide text and show only icon on small screens */
 @media (max-width: 480px) {
     .tiktok-btn .btn-text {
