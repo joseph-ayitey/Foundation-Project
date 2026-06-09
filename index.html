@@ -43,7 +43,7 @@
 
         </div>
     </nav>
-    <main id="main-content"></main>
+    <main id="main-content">
     
      <!-- Hero Section -->
     <section class="hero">
@@ -370,18 +370,18 @@
                 <div class="contact-form-container animate-on-scroll">
                     <form id="contactForm" class="contact-form">
                         <div class="form-group">
-                            <label for="name">Full Name *</label>
-                            <input type="text" id="name" name="name" required placeholder="Your name">
+                            <label for="name">Full Name *</label><input
+                            <input type="text" id="name" name="name" required placeholder="Your name" autocomplete="name">
                         </div>
                         
                         <div class="form-group">
                             <label for="email">Email Address *</label>
-                            <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                            <input type="email" id="email" name="email" required placeholder="your.email@example.com" autocomplete="email">
                         </div>
                         
                         <div class="form-group">
                             <label for="subject">Subject *</label>
-                            <select id="subject" name="subject" required>
+                            <select id="subject" name="subject" required autocomplete="off">
                                 <option value="">Select a subject</option>
                                 <option value="donation">Donation Inquiry</option>
                                 <option value="volunteer">Volunteering</option>
@@ -423,14 +423,14 @@
                 <p>Subscribe to our newsletter for the latest news, stories, and impact updates.</p>
                 <form class="newsletter-form">
                     <label for="newsletter-email" class="sr-only">Email address</label>
-                    <input type="email" placeholder="Enter your email address" required>
+                    <input type="email" id="newsletter-email" name="newsletter-email" placeholder="Enter your email address" required autocomplete="email">
 
                     <button type="submit" class="btn-primary">Subscribe</button>
                 </form>
             </div>
         </div>
     </section>
-
+    </main>
      <!-- Footer -->
     <footer class="footer">
         <div class="container">
